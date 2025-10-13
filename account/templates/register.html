@@ -1,0 +1,35 @@
+
+<!-- register.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register — MySite</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>.glass{background:rgba(255,255,255,0.6);backdrop-filter:blur(6px);}</style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50 flex items-center justify-center px-4">
+   <main class="w-full max-w-md glass border rounded-2xl shadow-lg p-8">
+    <h2 class="text-3xl font-bold text-slate-900 mb-2">Create account ✨</h2>
+    <p class="text-slate-600 mb-6">Register to get started.</p>
+
+    <form action="#" method="POST" class="space-y-4" >
+      {% csrf_token %}
+      {% for form in forms  %}
+      <div>
+        <label for="name" class="block text-sm font-medium text-slate-700">{{form.label}}</label>
+        <input type="{{form.form.widget.input_type}}" id="name" name="{{form.name}}" class="w-full mt-1 px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-indigo-300" placeholder="" required />
+      </div>
+     {% endfor %}
+      <button type="submit" class="w-full py-2.5 rounded-lg bg-indigo-600 text-white font-semibold shadow hover:brightness-95">Register</button>
+    </form>
+
+    <p class="mt-6 text-center text-sm text-slate-600">
+      Already have an account?
+      <a href="login" class="text-indigo-600 font-medium hover:underline">Login</a>
+    </p>
+  </main> 
+
+</body>
+</html>
