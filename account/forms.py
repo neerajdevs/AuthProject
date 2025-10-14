@@ -29,4 +29,7 @@ class RegistrationFrom(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['bio', 'avatar']
+        fields = ['fullname' , 'bio' , 'age' , 'role','avatar','linkedin','instagram','protfolio','leetcode',
+                  'gfg','Project_1','Project_2','Project_3']
+        
+  
