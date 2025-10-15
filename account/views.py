@@ -1,15 +1,26 @@
 from django.shortcuts import render , redirect
 from .forms import *
 from django.contrib.auth import login , logout , authenticate
+from django.db import transaction
 
 # Create your views here.
 
 def RegisterView(request):
     if request.method == 'POST':
         fm = RegistrationFrom(request.POST)
-        if fm.is_valid:
-            fm.save()
-            return redirect('login')
+        if fm.is_valid():
+            with transaction.atomic():
+                # form se instance banao but abhi save mat karo
+                user = fm.save(commit=False)
+                # password ko hash karo
+                user.set_password(fm.cleaned_data['password1'])
+                # ab DB me save karo
+                user.save()
+
+                # agar profile create karni ho:
+                Profile.objects.get_or_create(user=user)
+                login(request , user)
+                return redirect('home')
     else:
         fm = RegistrationFrom()
     

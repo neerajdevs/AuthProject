@@ -67,11 +67,10 @@
                 </div>
                 <div class="flex items-center gap-2">
                   <button class="px-4 py-2 rounded-lg border text-slate-700">Message</button>
-                  <button class="px-4 py-2 rounded-lg bg-indigo-600 text-white">Edit Profile</button>
+                  <button class="px-4 py-2 rounded-lg bg-indigo-600 text-white"><a href="{% url 'edit-profile' %}">Edit Profile</a></button>
                 </div>
               </div>
               {% for fm in form  %}
-                
               <div class="mt-4 text-slate-700">
                 <h3 class="text-sm font-semibold text-slate-800">{{fm.label}}</h3>
                 <p class="mt-1 text-sm text-slate-600" id="bio">{{fm.value}}</p>

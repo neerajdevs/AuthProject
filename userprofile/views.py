@@ -14,8 +14,9 @@ def DashboardView(request):
 
 @login_required
 def ProfileView(request):
-    profilefm = Profile.objects.get(user = request.user)
-    return render(request , 'profile.html' , {"form" : profilefm})
+    profilefm = Profile.objects.get(user=request.user)
+    form = ProfileForm(instance=profilefm)
+    return render(request , 'profile.html' , {"form" : form})
 
 
 @login_required
