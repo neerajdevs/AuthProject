@@ -1,25 +1,42 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Profile — MySite</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>.glass{background:rgba(255,255,255,0.6);backdrop-filter:blur(6px);}</style>
+  <style>
+    .glass {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(6px);
+    }
+  </style>
 </head>
+
 <body class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50">
   <!-- Navbar -->
   <header class="fixed top-0 left-0 right-0 z-30">
     <nav class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="h-10 w-10 rounded-lg bg-gradient-to-tr from-indigo-500 to-pink-500 flex items-center justify-center text-white font-bold">M</div>
+        <div
+          class="h-10 w-10 rounded-lg bg-gradient-to-tr from-indigo-500 to-pink-500 flex items-center justify-center text-white font-bold">
+          M</div>
         <a href="#" class="text-slate-800 font-semibold text-lg">MySite</a>
       </div>
 
       <div class="flex items-center gap-3 relative">
-        <button id="profileBtn" class="flex items-center gap-2 p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-300">
+        <button id="profileBtn"
+          class="flex items-center gap-2 p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-300">
           <div class="h-9 w-9 rounded-full overflow-hidden border-2 border-white shadow-sm">
-            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop&crop=faces" alt="avatar" class="h-full w-full object-cover" />
+
+            {% if profilefm.avatar %}
+            <img src="/media/{{profilefm.avatar}}"" alt="avatar" class="h-full w-full object-cover rounded-full" />
+            {% else %}
+            <img src="/media/avatars/default.png" alt="default avatar"
+              class="h-full w-full object-cover rounded-full" />
+            {% endif %}
           </div>
         </button>
         <div id="profileDropdown" class="hidden absolute right-0 mt-12 w-44 bg-white rounded-lg shadow-lg glass border">
@@ -54,7 +71,9 @@
             <!-- Avatar -->
             <div class="flex-shrink-0">
               <div class="h-36 w-36 rounded-full overflow-hidden border-4 border-white shadow-lg">
-                <img id="avatarImg" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop&crop=faces" alt="Profile" class="h-full w-full object-cover" />
+                <img id="avatarImg"
+                  src="/media/{{profilefm.avatar}}"
+                  alt="Profile" class="h-full w-full object-cover" />
               </div>
             </div>
 
@@ -67,10 +86,11 @@
                 </div>
                 <div class="flex items-center gap-2">
                   <button class="px-4 py-2 rounded-lg border text-slate-700">Message</button>
-                  <button class="px-4 py-2 rounded-lg bg-indigo-600 text-white"><a href="{% url 'edit-profile' %}">Edit Profile</a></button>
+                  <button class="px-4 py-2 rounded-lg bg-indigo-600 text-white"><a href="{% url 'edit-profile' %}">Edit
+                      Profile</a></button>
                 </div>
               </div>
-              {% for fm in form  %}
+              {% for fm in form %}
               <div class="mt-4 text-slate-700">
                 <h3 class="text-sm font-semibold text-slate-800">{{fm.label}}</h3>
                 <p class="mt-1 text-sm text-slate-600" id="bio">{{fm.value}}</p>
@@ -103,4 +123,5 @@
     }
   </script>
 </body>
+
 </html>

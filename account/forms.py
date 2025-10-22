@@ -32,4 +32,10 @@ class ProfileForm(forms.ModelForm):
         fields = ['fullname' , 'bio' , 'age' , 'role','avatar','linkedin','instagram','protfolio','leetcode',
                   'gfg','Project_1','Project_2','Project_3']
         
+    def __init__(self, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+        
+        self.fields['bio'].required = False
+        self.fields['age'].required = False
+        
   

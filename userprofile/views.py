@@ -16,7 +16,7 @@ def DashboardView(request):
 def ProfileView(request):
     profilefm = Profile.objects.get(user=request.user)
     form = ProfileForm(instance=profilefm)
-    return render(request , 'profile.html' , {"form" : form})
+    return render(request , 'profile.html' , {"form" : form , "profilefm" : profilefm})
 
 
 @login_required
@@ -26,12 +26,17 @@ def EditView(request):
     if request.method == 'POST':
         editfm = ProfileForm(request.POST, request.FILES, instance=profile)
         if editfm.is_valid():
-            editfm.save()
-            print("Profile Updated Successfully ✅")
-            return redirect('profile')  # apni profile page ka url name daal yahan
+             if 'avatar' in request.FILES:
+                profile.avatar = request.FILES['avatar']
+                print("Assigned avatar file:", request.FILES['avatar'].name)
+                profile.save()
+                print("Saved directly, avatar:", profile.avatar.name)
+                print("Profile Updated Successfully ✅")
+                return redirect('profile')  # apni profile page ka url name daal yahan
         else:
             print(editfm.errors)
+            return redirect('edit-profile')
     else:
         editfm = ProfileForm(instance=profile)
 
-    return render(request, 'edit-profile.html', {'form': editfm})
+    return render(request, 'edit-profile.html', {'form': editfm , "profile": profile})

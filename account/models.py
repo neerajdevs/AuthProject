@@ -10,7 +10,7 @@ class Profile(models.Model):
     role = models.CharField(choices=[('Python Developer' , 'Python developer') , ('AI/ML Engineer' , 'AI/ML Engineer'),
                                      ('MERN Stack' , 'MERN Stack'), ('Project Manager' , 'Project Manager'), ('Perparaing','Perparaing')] ,default='Perparaing' )
     
-    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+    avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
     linkedin = models.URLField(max_length=200 , blank= True)
     instagram = models.URLField(max_length=200, blank= True)
     protfolio = models.URLField(max_length=200, blank= True)
