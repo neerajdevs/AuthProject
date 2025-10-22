@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from account.forms import *
 from account.models import *
+from account.views import *
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 

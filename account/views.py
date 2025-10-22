@@ -31,14 +31,8 @@ def LoginView(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
 
-        try:
-            user_obj = User.objects.get(email=email)
-            print("Found user:", user_obj.username, "is_active:", user_obj.is_active)
-            print("check_password:", user_obj.check_password(password))   # True/False
-        except User.DoesNotExist:
-            print("No user with this email")
 
-
+        user_obj = User.objects.get(email=email)
         user = authenticate(request , username = user_obj.username , password = password)
 
         if user is not None:
@@ -52,3 +46,7 @@ def LoginView(request):
             return redirect("register")
 
     return render(request , 'login.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
