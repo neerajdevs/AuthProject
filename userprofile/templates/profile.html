@@ -82,7 +82,7 @@
               <div class="flex items-center justify-between gap-4">
                 <div>
                   <div class="text-2xl font-extrabold text-slate-900" id="username">@{{request.user.username}}</div>
-                  <div class="text-sm text-slate-600" id="fullname">{{form.fullname}}</div>
+                  <div class="text-sm text-slate-600" id="fullname">{% if form.fullname %}{{form.fullname}}{% else %}No Name Provided{% endif %}</div>
                 </div>
                 <div class="flex items-center gap-2">
                   <button class="px-4 py-2 rounded-lg border text-slate-700">Message</button>
@@ -91,6 +91,7 @@
                 </div>
               </div>
               {% for fm in form %}
+              
               <div class="mt-4 text-slate-700">
                 <h3 class="text-sm font-semibold text-slate-800">{{fm.label}}</h3>
                 <p class="mt-1 text-sm text-slate-600" id="bio">{{fm.value}}</p>

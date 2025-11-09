@@ -24,10 +24,18 @@
       </div>
 
       <!-- Right: actions -->
-      <div class="hidden md:flex items-center gap-3">
-        <a href="{% url 'login' %}" class="px-4 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-slate-100">Login</a>
-        <a href="{% url 'register' %}" class="px-4 py-2 rounded-md text-sm font-medium bg-indigo-600 text-white shadow hover:brightness-95">Register</a>
-      </div>
+       {% if user.is_authenticate %}
+       <div class="hidden md:flex items-center gap-3">
+         <a href="{% url 'dashboard' %}" class="px-4 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-slate-100">Dashboard</a>
+         <a href="{% url 'logout' %}" class="px-4 py-2 rounded-md text-sm font-medium bg-red-600 text-white shadow hover:brightness-95">Logout</a>
+        </div>
+        {% else %}
+        <div class="hidden md:flex items-center gap-3">
+    <a href="{% url 'login' %}" class="px-4 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-slate-100">Login</a>
+    <a href="{% url 'register' %}" class="px-4 py-2 rounded-md text-sm font-medium bg-indigo-600 text-white shadow hover:brightness-95">Register</a>
+  </div>
+       {% endif %}
+     
 
       <!-- Mobile menu button -->
       <div class="md:hidden">

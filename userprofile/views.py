@@ -31,9 +31,11 @@ def EditView(request):
                 profile.avatar = request.FILES['avatar']
                 print("Assigned avatar file:", request.FILES['avatar'].name)
                 profile.save()
-                print("Saved directly, avatar:", profile.avatar.name)
-                print("Profile Updated Successfully ✅")
-                return redirect('profile')  # apni profile page ka url name daal yahan
+                return redirect('profile')
+             else:
+                editfm.save()
+                print("Profile Updated Successfully without new avatar ✅")
+                return redirect('profile') 
         else:
             print(editfm.errors)
             return redirect('edit-profile')

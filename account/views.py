@@ -20,7 +20,7 @@ def RegisterView(request):
                 # agar profile create karni ho:
                 Profile.objects.get_or_create(user=user)
                 login(request , user)
-                return redirect('home')
+                return redirect('dashboard')
     else:
         fm = RegistrationFrom()
     
@@ -30,20 +30,17 @@ def LoginView(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-
-
         user_obj = User.objects.get(email=email)
         user = authenticate(request , username = user_obj.username , password = password)
 
-        if user is not None:
+        if user :
             login(request , user)
             print("Login Successfull....")
             return redirect('dashboard')
             
         else:
             print("Login Failed")
-            
-            return redirect("register")
+            return redirect("login")
 
     return render(request , 'login.html')
 
